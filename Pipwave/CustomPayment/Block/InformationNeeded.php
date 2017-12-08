@@ -77,6 +77,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
             $billAddress1 = implode(' ', $order->getBillingAddress()->getStreet());
         }
 
+        /*
         //if merchant provide success url use theirs, else our default
         if ($this->adminConfig->getSuccessUrl() == null) {
             $success_url = $this->urlLink->defaultSuccessPageUrl();
@@ -90,6 +91,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
         } else {
             $fail_url = $this->adminConfig->getFailUrl();
         }
+        */
 
         $this->data = array(
             'action' => 'initiate-payment', 
@@ -132,8 +134,8 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
                 'state' => $order->getBillingAddress()->getRegion(), 
             ), 
             'api_override' => array(
-                'success_url' => $success_url, 
-                'fail_url' => $fail_url, 
+                'success_url' => $this->urlLink->defaultSuccessPageUrl(),//$success_url, 
+                'fail_url' => $this->urlLink->defaultFailPageUrl(),//$fail_url, 
                 'notification_url' => $this->urlLink->notificationPageUrl(), //$notificationUrl, 
             ), 
         );
