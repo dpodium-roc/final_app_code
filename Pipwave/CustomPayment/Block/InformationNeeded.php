@@ -239,8 +239,8 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
                     //$status = $method->status_cancelled;
                     break;
                 case 10: // complete
-                    $status = SELF::PIPWAVE_PAID;
-                    $order->setState($status)->setStatus($status);
+                    //$status = SELF::PIPWAVE_PAID;
+                    //$order->setState($status)->setStatus($status);
                     
                     //502
                     if ($txn_sub_status==502) {

@@ -46,17 +46,8 @@ class Index extends \Magento\Framework\App\Action\Action
         $signatureParam = $this->info->get_signatureParam();
         $newSignature = $this->pipwaveIntegration->generatePwSignature($signatureParam);
 
-        //print_r($post_data);
-        print_r($signatureParam);
-        print_r('<br>');
         $signatureParam = $this->information->getSignatureParam();
 
-        print_r($signatureParam);
-        print_r($post_data['signature']);
-        echo '<br>';
-        print_r($signature);
-        echo '<br>';
-        print_r($newSignature);
         //DO NOT DELETE
         //check signature and newSignature
         $this->info->compareSignature($signature, $newSignature);
