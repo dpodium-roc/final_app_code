@@ -61,7 +61,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
         $total = $order->getGrandTotal();
 
         //add ngrok url to replace 'localhost'
-        //$notificationUrl = 'https://9ca45aa5.ngrok.io/omg/omg/notification/notification/index';
+        $notificationUrl = 'https://849d333e.ngrok.io/omg/omg/notification/notification/index';
 
         //ship address
         $shipAddress1 = '';
@@ -136,7 +136,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
             'api_override' => array(
                 'success_url' => $this->urlLink->defaultSuccessPageUrl(),//$success_url, 
                 'fail_url' => $this->urlLink->defaultFailPageUrl(),//$fail_url, 
-                'notification_url' => $this->urlLink->notificationPageUrl(), //$notificationUrl, 
+                'notification_url' => $notificationUrl, //$this->urlLink->notificationPageUrl(),
             ), 
         );
 
@@ -239,8 +239,8 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
                     //$status = $method->status_cancelled;
                     break;
                 case 10: // complete
-                    //$status = SELF::PIPWAVE_PAID;
-                    //$order->setState($status)->setStatus($status);
+                    $status = SELF::PIPWAVE_PAID;
+                    $order->setState($status)->setStatus($status);
                     
                     //502
                     if ($txn_sub_status==502) {
