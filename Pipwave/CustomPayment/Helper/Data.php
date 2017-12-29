@@ -14,14 +14,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected $scopeConfig;
     //from etc\adminhtml\system.xml
-    const API_KEY = 'payment/custompayment/api_key';
-    const API_SECRET = 'payment/custompayment/api_secret';
-    const TEST_MODE = 'payment/custompayment/test_mode';
-    const PROCESSING_FEE = 'payment/custompayment/processing_fee';
-    const AUTO_SHIPPING = 'payment/custompayment/auto_shipping';
-    const AUTO_INVOICE = 'payment/custompayment/auto_invoice';
-    const FAIL_URL = 'payment/custompayment/fail_url';
-    const SUCCESS_URL = 'payment/custompayment/success_url';
+    const API_KEY           = 'payment/custompayment/api_key';
+    const API_SECRET        = 'payment/custompayment/api_secret';
+    const TEST_MODE         = 'payment/custompayment/test_mode';
+    const PROCESSING_FEE    = 'payment/custompayment/processing_fee';
+    const AUTO_SHIPPING     = 'payment/custompayment/auto_shipping';
+    const AUTO_INVOICE      = 'payment/custompayment/auto_invoice';
+    const FAIL_URL          = 'payment/custompayment/fail_url';
+    const SUCCESS_URL       = 'payment/custompayment/success_url';
     
 
     public function getApiKey() {
