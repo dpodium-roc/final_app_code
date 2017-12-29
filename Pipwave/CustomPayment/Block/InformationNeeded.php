@@ -36,16 +36,16 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
         \Pipwave\CustomPayment\Model\Order\Invoice $invoice,
         \Pipwave\CustomPayment\Model\Order\Shipment $shipment
     ) {
-        $this->_storeManager = $storeManager;
-        $this->customer = $customer;
-        $this->checkout = $checkout;
-        $this->creditmemoFactory = $creditmemoFactory;
-        $this->CreditmemoService = $CreditmemoService;
-        $this->productMetadata = $productMetadata;
-        $this->adminConfig = $adminData;
-        $this->urlLink = $urlLink;
-        $this->invoice = $invoice;
-        $this->shipment = $shipment;
+        $this->_storeManager        = $storeManager;
+        $this->customer             = $customer;
+        $this->checkout             = $checkout;
+        $this->creditmemoFactory    = $creditmemoFactory;
+        $this->CreditmemoService    = $CreditmemoService;
+        $this->productMetadata      = $productMetadata;
+        $this->adminConfig          = $adminData;
+        $this->urlLink              = $urlLink;
+        $this->invoice              = $invoice;
+        $this->shipment             = $shipment;
     }
 
     //called in Pipwave\CustomPayment\Controller\Index\Index
@@ -94,49 +94,49 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
         */
 
         $this->data = array(
-            'action' => 'initiate-payment', 
-            'timestamp' => time(), 
-            'api_key' => $this->adminConfig->getApiKey(), 
-            'api_secret' => $this->adminConfig->getApiSecret(), 
-            'txn_id' => $order->getIncrementId(),
-            'amount' => (float)$total, 
+            'action'        => 'initiate-payment', 
+            'timestamp'     => time(), 
+            'api_key'       => $this->adminConfig->getApiKey(), 
+            'api_secret'    => $this->adminConfig->getApiSecret(), 
+            'txn_id'        => $order->getIncrementId(),
+            'amount'        => (float)$total, 
             'currency_code' => $this->_storeManager->getStore()->getCurrentCurrency()->getCode(), 
             'shipping_amount' => $order->getShippingAmount(), 
-            'buyer_info' => array(
-                'id' => $this->customer->getCustomerId(), 
-                'email' => $this->customer->getCustomer()->getEmail(), 
-                'first_name' => $order->getBillingAddress()->getFirstname(), 
-                'last_name' => $order->getBillingAddress()->getLastname(), 
-                'contact_no' => $order->getBillingAddress()->getTelephone(), 
-                'country_code' => $order->getBillingAddress()->getCountryId(), 
+            'buyer_info'    => array(
+                'id'            => $this->customer->getCustomerId(), 
+                'email'         => $this->customer->getCustomer()->getEmail(), 
+                'first_name'    => $order->getBillingAddress()->getFirstname(), 
+                'last_name'     => $order->getBillingAddress()->getLastname(), 
+                'contact_no'    => $order->getBillingAddress()->getTelephone(), 
+                'country_code'  => $order->getBillingAddress()->getCountryId(), 
                 'surcharge_group' => $this->adminConfig->getProcessingFeeGroup(), 
             ), 
             'shipping_info' => array(
-                'name' => $order->getShippingAddress()->getFirstname() . ' ' . $order->getShippingAddress()->getLastname(), 
-                'city' => $order->getShippingAddress()->getCity(), 
-                'zip' => $order->getShippingAddress()->getPostCode(), 
-                'country_iso2' => $order->getShippingAddress()->getCountryId(), 
-                'email' => $order->getShippingAddress()->getEmail(), 
-                'contact_no' => $order->getShippingAddress()->getTelephone(), 
-                'address1' => $shipAddress1, 
+                'name'          => $order->getShippingAddress()->getFirstname() . ' ' . $order->getShippingAddress()->getLastname(), 
+                'city'          => $order->getShippingAddress()->getCity(), 
+                'zip'           => $order->getShippingAddress()->getPostCode(), 
+                'country_iso2'  => $order->getShippingAddress()->getCountryId(), 
+                'email'         => $order->getShippingAddress()->getEmail(), 
+                'contact_no'    => $order->getShippingAddress()->getTelephone(), 
+                'address1'      => $shipAddress1, 
                 //'address2' => $shipAddress2,
-                'state' => $order->getShippingAddress()->getRegion(), 
+                'state'         => $order->getShippingAddress()->getRegion(), 
             ), 
             'billing_info' => array(
-                'name' => $order->getBillingAddress()->getFirstname() . ' ' . $order->getBillingAddress()->getLastname(), 
-                'city' => $order->getBillingAddress()->getCity(), 
-                'zip' => $order->getBillingAddress()->getPostCode(), 
-                'country_iso2' => $order->getBillingAddress()->getCountryId(), 
-                'email' => $order->getBillingAddress()->getEmail(), 
-                'contact_no' => $order->getBillingAddress()->getTelephone(), 
-                'address1' => $billAddress1, 
+                'name'          => $order->getBillingAddress()->getFirstname() . ' ' . $order->getBillingAddress()->getLastname(), 
+                'city'          => $order->getBillingAddress()->getCity(), 
+                'zip'           => $order->getBillingAddress()->getPostCode(), 
+                'country_iso2'  => $order->getBillingAddress()->getCountryId(), 
+                'email'         => $order->getBillingAddress()->getEmail(), 
+                'contact_no'    => $order->getBillingAddress()->getTelephone(), 
+                'address1'      => $billAddress1, 
                 //'address2' => $billAddress2,
-                'state' => $order->getBillingAddress()->getRegion(), 
+                'state'         => $order->getBillingAddress()->getRegion(), 
             ), 
             'api_override' => array(
-                'success_url' => $this->urlLink->defaultSuccessPageUrl(),//$success_url, 
-                'fail_url' => $this->urlLink->defaultFailPageUrl(),//$fail_url, 
-                'notification_url' => $this->urlLink->notificationPageUrl(),//$notificationUrl, //
+                'success_url'       => $this->urlLink->defaultSuccessPageUrl(),//$success_url, 
+                'fail_url'          => $this->urlLink->defaultFailPageUrl(),//$fail_url, 
+                'notification_url'  => $this->urlLink->notificationPageUrl(),//$notificationUrl, //
             ), 
         );
 
@@ -147,11 +147,11 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
             // some weird things came out (repetition) if without if else
             if ((float)$product->getPrice()!=0) {
             $itemInfo[] = array(
-                'name' => (null!==$product->getName() && !empty($product->getName()) ? $product->getName() : ''),
-                'sku' => (null!==$product->getSku() && !empty($product->getSku()) ? $product->getSku() : ''),
+                'name'          => (null!==$product->getName() && !empty($product->getName()) ? $product->getName() : ''),
+                'sku'           => (null!==$product->getSku() && !empty($product->getSku()) ? $product->getSku() : ''),
                 'currency_code' => $this->_storeManager->getStore()->getCurrentCurrency()->getCode(),
-                'amount' => (float)$product->getPrice(),
-                'quantity' => (int)$item->getQtyOrdered(),
+                'amount'        => (float)$product->getPrice(),
+                'quantity'      => (int)$item->getQtyOrdered(),
                 );
             }
         }
@@ -159,23 +159,23 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
             $this->data['item_info'] = $itemInfo;
         }
 
-        $this->testMode = $this->adminConfig->getTestMode();
-        $this->url = $this->urlLink->getUrl($this->testMode);
-        $this->renderUrl = $this->urlLink->getRenderUrl($this->testMode);
-        $this->loadingImageUrl = $this->urlLink->getLoadingImageUrl($this->testMode);
+        $this->testMode         = $this->adminConfig->getTestMode();
+        $this->url              = $this->urlLink->getUrl($this->testMode);
+        $this->renderUrl        = $this->urlLink->getRenderUrl($this->testMode);
+        $this->loadingImageUrl  = $this->urlLink->getLoadingImageUrl($this->testMode);
     }
 
     function setSignatureParam() {
         //need modification, call object manager?
         //read some_functions_get_information.php [deskstop]
         $this->signatureParam = array(
-            'api_key' => $this->data['api_key'],
-            'api_secret' => $this->data['api_secret'],
-            'txn_id' => $this->data['txn_id'],
-            'amount' => $this->data['amount'],
+            'api_key'       => $this->data['api_key'],
+            'api_secret'    => $this->data['api_secret'],
+            'txn_id'        => $this->data['txn_id'],
+            'amount'        => $this->data['amount'],
             'currency_code' => $this->data['currency_code'],
-            'action' => $this->data['action'],
-            'timestamp' => $this->data['timestamp']
+            'action'        => $this->data['action'],
+            'timestamp'     => $this->data['timestamp']
         );
     }
 
@@ -207,14 +207,14 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
 
     //order status 
     //Pipwave status and magento status
-    const PIPWAVE_PENDING = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
-    const PIPWAVE_FAIL = \Magento\Sales\Model\Order::STATE_CANCELED;
-    const PIPWAVE_CANCELED = \Magento\Sales\Model\Order::STATE_CANCELED;
-    const PIPWAVE_PAID = \Magento\Sales\Model\Order::STATE_PROCESSING;
-    const PIPWAVE_FULL_REFUNDED = \Magento\Sales\Model\Order::STATE_CLOSED;
-    const PIPWAVE_PARTIAL_REFUNDED = \Magento\Sales\Model\Order::STATE_PROCESSING;
+    const PIPWAVE_PENDING           = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+    const PIPWAVE_FAIL              = \Magento\Sales\Model\Order::STATE_CANCELED;
+    const PIPWAVE_CANCELED          = \Magento\Sales\Model\Order::STATE_CANCELED;
+    const PIPWAVE_PAID              = \Magento\Sales\Model\Order::STATE_PROCESSING;
+    const PIPWAVE_FULL_REFUNDED     = \Magento\Sales\Model\Order::STATE_CLOSED;
+    const PIPWAVE_PARTIAL_REFUNDED  = \Magento\Sales\Model\Order::STATE_PROCESSING;
     const PIPWAVE_SIGNATURE_MISMATCH = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
-    const PIPWAVE_UNKNOWN_STATUS = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+    const PIPWAVE_UNKNOWN_STATUS    = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
 
     //called in Pipwave\CustomPayment\Controller\Notification\Index
     function processNotification($transaction_status, $order, $refund_amount,$txn_sub_status)
