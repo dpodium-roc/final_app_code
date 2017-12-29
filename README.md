@@ -1,4 +1,4 @@
-pipwave_Magento_Plugin
+pipwave_Magento2_Plugin
 ==========================
 We provide simple, reliable, and cost-effective way to accept payments online. And it's free to use!
 
@@ -12,7 +12,7 @@ Installation
 ============
 1. Download this repository.
 
-2. Unzip pipwave_Magento_Plugin.zip. 
+2. Unzip pipwave_Magento2_Plugin.zip. 
 
 3. Go to Magento installation root directory. Install/upload 'pipwave' directory into 'app/code'.
 
@@ -23,7 +23,7 @@ Installation
 
 6. Navigate to Stores > Configuration > SALES > Payment Methods. Scroll down to pipwave payment.
 
-7. Enable the plugin. Fill in your pipwave API Key & pipwave API Secret to the respective fields.
+7. Enable the module. Fill in your pipwave API Key & pipwave API Secret to the respective fields.
 
 8. Save the configuration and it's done!
 
