@@ -14,15 +14,20 @@ Installation
 
 2. Login to your WordPress WooCommerce admin dashboard, navigate to the Plugins menu and click Add New.
 
-3. Unzip pipwave_Magento_Plugin.zip. Install/upload 'pipwave' directory into 'app/code'.
+3. Unzip pipwave_Magento_Plugin.zip. 
 
-4. After installation is successful, Login to your magento admin account.
+4. Go to Magento installation root directory. Install/upload 'pipwave' directory into 'app/code'.
 
-5. Navigate to Stores > Configuration > SALES > Payment Methods. Scroll down to pipwave payment.
+5. Enter the following at the command line: `php bin/magento setup:upgrade`
+[in CMD/Command Prompt][magento root directory]
 
-6. Enable the plugin. Fill in your pipwave API Key & pipwave API Secret to the respective fields.
+5. After installation is successful, login to your magento admin account.
 
-7. Save the configuration and it's done!
+6. Navigate to Stores > Configuration > SALES > Payment Methods. Scroll down to pipwave payment.
+
+7. Enable the plugin. Fill in your pipwave API Key & pipwave API Secret to the respective fields.
+
+8. Save the configuration and it's done!
 
 **Please feel free to contact pipwave directly with any integration questions.**
 
