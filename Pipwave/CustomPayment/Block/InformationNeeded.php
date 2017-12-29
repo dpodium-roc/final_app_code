@@ -255,7 +255,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
 
                             $order->addStatusHistoryComment('Invoice created automatically', false);
                             $order->addStatusHistoryComment(__('Notified customer about invoice #%1.', $invoice['id']))->setIsCustomerNotified(true);
-                            if($invoice && $this->adminConfig->isShippingEnabled( )== 1) {
+                            if($invoice && $this->adminConfig->isShippingEnabled() == 1) {
                                 //create shipment
                                 $this->shipment->createShipment($order,$invoice);
                                 $order->addStatusHistoryComment('Shipment created automatically', false);
