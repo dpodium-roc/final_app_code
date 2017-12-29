@@ -61,7 +61,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
         $total = $order->getGrandTotal();
 
         //add ngrok url to replace 'localhost'
-        $notificationUrl = 'https://849d333e.ngrok.io/omg/omg/notification/notification/index';
+        //$notificationUrl = 'https://849d333e.ngrok.io/omg/omg/notification/notification/index';
 
         //ship address
         $shipAddress1 = '';
@@ -136,7 +136,7 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
             'api_override' => array(
                 'success_url' => $this->urlLink->defaultSuccessPageUrl(),//$success_url, 
                 'fail_url' => $this->urlLink->defaultFailPageUrl(),//$fail_url, 
-                'notification_url' => $notificationUrl, //$this->urlLink->notificationPageUrl(),
+                'notification_url' => $this->urlLink->notificationPageUrl(),//$notificationUrl, //
             ), 
         );
 
