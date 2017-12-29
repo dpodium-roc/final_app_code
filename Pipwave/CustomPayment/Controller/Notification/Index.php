@@ -25,10 +25,10 @@ class Index extends \Magento\Framework\App\Action\Action
         \Pipwave\CustomPayment\Model\NotificationInformationFactory $NotificationInformationFactory
     ) {
         parent::__construct($context);
-        $this->checkout = $checkout;
-        $this->order = $order;
-        $this->information = $information;
-        $this->info = $info;
+        $this->checkout     = $checkout;
+        $this->order        = $order;
+        $this->information  = $information;
+        $this->info         = $info;
         $this->pipwaveIntegration = $pipwaveIntegration;
         $this->NotificationInformationFactoryDB = $NotificationInformationFactoryDB;
         $this->NotificationInformationFactory = $NotificationInformationFactory;
