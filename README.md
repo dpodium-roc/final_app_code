@@ -12,13 +12,11 @@ Installation
 ============
 1. Download this repository.
 
-2. Login to your WordPress WooCommerce admin dashboard, navigate to the Plugins menu and click Add New.
+2. Unzip pipwave_Magento_Plugin.zip. 
 
-3. Unzip pipwave_Magento_Plugin.zip. 
+3. Go to Magento installation root directory. Install/upload 'pipwave' directory into 'app/code'.
 
-4. Go to Magento installation root directory. Install/upload 'pipwave' directory into 'app/code'.
-
-5. Enter the following at the command line: `php bin/magento setup:upgrade`
+4. Enter the following at the command line: `php bin/magento setup:upgrade`
 [in CMD/Command Prompt][magento root directory]
 
 5. After installation is successful, login to your magento admin account.
