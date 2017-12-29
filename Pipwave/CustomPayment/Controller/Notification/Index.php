@@ -42,9 +42,9 @@ class Index extends \Magento\Framework\App\Action\Action
         $post_data = json_decode(file_get_contents('php://input'), true);
 
         $this->info->setDData($post_data);
-        $signature = $this->info->getSignature();
+        $signature      = $this->info->getSignature();
         $signatureParam = $this->info->get_signatureParam();
-        $newSignature = $this->pipwaveIntegration->generatePwSignature($signatureParam);
+        $newSignature   = $this->pipwaveIntegration->generatePwSignature($signatureParam);
 
         //DO NOT DELETE
         //check signature and newSignature
@@ -52,20 +52,20 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $order_number = $post_data['txn_id'];
         //get order using increment id
-        $order = $this->order->loadByIncrementId($order_number);
+        $order              = $this->order->loadByIncrementId($order_number);
         $transaction_status = $this->info->getTransactionStatus();
-        $refund = $this->info->getRefund();
-        $txn_sub_status = $this->info->getTransactionSubStatus();
+        $refund             = $this->info->getRefund();
+        $txn_sub_status     = $this->info->getTransactionSubStatus();
         
         //testing status other than 10
         //$transaction_status = 2;
         
         //modify transaction status
-        $order = $this->information->processNotification($transaction_status, $order, $refund, $txn_sub_status);
+        $order          = $this->information->processNotification($transaction_status, $order, $refund, $txn_sub_status);
 
-        $rule_action = $this->info->getPipwaveScore();
-        $pipwave_score = $this->info->getRuleAction();
-        $message = $this->info->getMessage();
+        $rule_action    = $this->info->getPipwaveScore();
+        $pipwave_score  = $this->info->getRuleAction();
+        $message        = $this->info->getMessage();
 
         //add to comment (view in admin interface, order>information>scroll down)
         $order->addStatusHistoryComment('Rule Action: ' . $rule_action)->setIsCustomerNotified(false);
