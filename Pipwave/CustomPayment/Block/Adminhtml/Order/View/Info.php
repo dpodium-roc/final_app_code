@@ -29,9 +29,9 @@ class Info extends \Magento\Framework\View\Element\Template
         \Pipwave\CustomPayment\Helper\Data $adminData,
         array $data = []
     ) {
-        $this->_coreRegistry = $registry;
-        $this->NotificationInformationFactory = $NotificationInformationFactory;
-        $this->adminConfig = $adminData;
+        $this->_coreRegistry                    = $registry;
+        $this->NotificationInformationFactory   = $NotificationInformationFactory;
+        $this->adminConfig                      = $adminData;
         parent::__construct($context, $data);
     }
 
@@ -41,72 +41,72 @@ class Info extends \Magento\Framework\View\Element\Template
         $payment_method = 'Pipwave' . (!empty($post_data['payment_method_title']) ? (" - " . $post_data['payment_method_title']) : "");
 
         //variables below used for $signatureParam
-        $timestamp = (isset($post_data['timestamp']) && !empty($post_data['timestamp'])) ? $post_data['timestamp'] : time();
-        $pw_id = (isset($post_data['pw_id']) && !empty($post_data['pw_id'])) ? $post_data['pw_id'] : '';
-        $order_number = (isset($post_data['txn_id']) && !empty($post_data['txn_id'])) ? $post_data['txn_id'] : '';
-        $amount = (isset($post_data['amount']) && !empty($post_data['amount'])) ? $post_data['amount'] : '';
-        $currency_code = (isset($post_data['currency_code']) && !empty($post_data['currency_code'])) ? $post_data['currency_code'] : '';
+        $timestamp          = (isset($post_data['timestamp']) && !empty($post_data['timestamp'])) ? $post_data['timestamp'] : time();
+        $pw_id              = (isset($post_data['pw_id']) && !empty($post_data['pw_id'])) ? $post_data['pw_id'] : '';
+        $order_number       = (isset($post_data['txn_id']) && !empty($post_data['txn_id'])) ? $post_data['txn_id'] : '';
+        $amount             = (isset($post_data['amount']) && !empty($post_data['amount'])) ? $post_data['amount'] : '';
+        $currency_code      = (isset($post_data['currency_code']) && !empty($post_data['currency_code'])) ? $post_data['currency_code'] : '';
         $this->transaction_status = (isset($post_data['transaction_status']) && !empty($post_data['transaction_status'])) ? $post_data['transaction_status'] : '';
 
         //used to compare with $newSignature
         $this->signature = (isset($post_data['signature']) && !empty($post_data['signature'])) ? $post_data['signature'] : '';
 
         //used in processNotification($transaction_status, $order, $refund, $txn_sub_status)
-        $total_amount = (isset($post_data['total_amount']) && !empty($post_data['total_amount'])) ? $post_data['total_amount'] : 0.00;
-        $final_amount = (isset($post_data['final_amount']) && !empty($post_data['final_amount'])) ? $post_data['final_amount'] : 0.00;
-        $this->refund = $total_amount - $final_amount;
-        $this->txn_sub_status = (isset($post_data['txn_sub_status']) && !empty($post_data['txn_sub_status'])) ? $post_data['txn_sub_status'] : time();
+        $total_amount           = (isset($post_data['total_amount']) && !empty($post_data['total_amount'])) ? $post_data['total_amount'] : 0.00;
+        $final_amount           = (isset($post_data['final_amount']) && !empty($post_data['final_amount'])) ? $post_data['final_amount'] : 0.00;
+        $this->refund           = $total_amount - $final_amount;
+        $this->txn_sub_status   = (isset($post_data['txn_sub_status']) && !empty($post_data['txn_sub_status'])) ? $post_data['txn_sub_status'] : time();
 
         // Pipwave risk execution result
-        $this->pipwave_score = isset($post_data['pipwave_score']) ? $post_data['pipwave_score'] : '';
-        $this->rule_action = isset($post_data['rules_action']) ? $post_data['rules_action'] : '';
-        $this->message = isset($post_data['message']) ? $post_data['message'] : '';
+        $this->pipwave_score    = isset($post_data['pipwave_score']) ? $post_data['pipwave_score'] : '';
+        $this->rule_action      = isset($post_data['rules_action']) ? $post_data['rules_action'] : '';
+        $this->message          = isset($post_data['message']) ? $post_data['message'] : '';
         //$shipping = (isset($post_data['shipping_info']) && !empty($post_data['shipping_info'])) ? $post_data['shipping_info'] : '';
         //used in generate_pw_signature($signatureParam)
-        $this->signatureParam = array(
-            'timestamp' => $timestamp,
-                'api_key' => $post_data['api_key'], 
-                'pw_id' => $pw_id, 
-                'txn_id' => $order_number, 
-                'amount' => $amount, 
-                'currency_code' => $currency_code, 
+        $this->signatureParam   = array(
+                'timestamp'         => $timestamp,
+                'api_key'           => $post_data['api_key'], 
+                'pw_id'             => $pw_id, 
+                'txn_id'            => $order_number, 
+                'amount'            => $amount, 
+                'currency_code'     => $currency_code, 
                 'transaction_status' => $this->transaction_status, 
-                'api_secret' => $this->adminConfig->getApiSecret() 
+                'api_secret'        => $this->adminConfig->getApiSecret() 
         );
 
         $this->data =[
-            'order_id' => $order_number, 
-            'pw_id' => $pw_id, 
-            'txn_id' => $order_number , 
-            'pg_txn_id' => $post_data['pg_txn_id'], 
-            'amount' => $post_data['amount'], 
-            'tax_exempted_amount' => $post_data['tax_exempted_amount'], 
+            'order_id'              => $order_number, 
+            'pw_id'                 => $pw_id, 
+            'txn_id'                => $order_number , 
+            'pg_txn_id'             => $post_data['pg_txn_id'], 
+            'amount'                => $post_data['amount'], 
+            'tax_exempted_amount'   => $post_data['tax_exempted_amount'], 
             'processing_fee_amount' => $post_data['processing_fee_amount'], 
-            'shipping_amount' => $post_data['shipping_amount'], 
-            'handling_amount' => $post_data['handling_amount'], 
-            'tax_amount' => $post_data['tax_amount'], 
-            'total_amount' => $post_data['total_amount'], 
-            'final_amount' => $post_data['final_amount'], 
-            'currency_code' => $post_data['currency_code'], 
-            'subscription_token' => $post_data['subscription_token'], 
-            'charge_index' => $post_data['charge_index'], 
-            'payment_method_code' => $post_data['payment_method_code'], 
-            'payment_method_title' => $post_data['payment_method_title'], 
-            'reversible_payment' => $post_data['reversible_payment'], 
-            'settlement_account' => $post_data['settlement_account'], 
-            'require_capture' => $post_data['require_capture'], 
-            'transaction_status' => $post_data['transaction_status'], 
-            'mobile_number' => $post_data['mobile_number'], 
+            'shipping_amount'       => $post_data['shipping_amount'], 
+            'handling_amount'       => $post_data['handling_amount'], 
+            'tax_amount'            => $post_data['tax_amount'], 
+            'total_amount'          => $post_data['total_amount'], 
+            'final_amount'          => $post_data['final_amount'], 
+            'currency_code'         => $post_data['currency_code'], 
+            'subscription_token'    => $post_data['subscription_token'], 
+            'charge_index'          => $post_data['charge_index'], 
+            'payment_method_code'   => $post_data['payment_method_code'], 
+            'payment_method_title'  => $post_data['payment_method_title'], 
+            'reversible_payment'    => $post_data['reversible_payment'], 
+            'settlement_account'    => $post_data['settlement_account'], 
+            'require_capture'       => $post_data['require_capture'], 
+            'transaction_status'    => $post_data['transaction_status'], 
+            'mobile_number'         => $post_data['mobile_number'], 
             'mobile_number_country_code' => $post_data['mobile_number_country_code'], 
             'mobile_number_verification' => $post_data['mobile_number_verification'], 
-            'risk_service_type' => $post_data['risk_service_type'], 
-            'aft_score' => $post_data['aft_score'], 
-            'aft_status' => $post_data['aft_status'], 
-            'pipwave_score' => $post_data['pipwave_score'], 
-            'rules_action' => $post_data['rules_action'], 
-            'risk_management_data' => json_encode($post_data['risk_management_data']), 
-            'matched_rules' => json_encode($post_data['matched_rules']), 
-            'txn_sub_status' => $post_data['txn_sub_status'] 
+            'risk_service_type'     => $post_data['risk_service_type'], 
+            'aft_score'             => $post_data['aft_score'], 
+            'aft_status'            => $post_data['aft_status'], 
+            'pipwave_score'         => $post_data['pipwave_score'], 
+            'rules_action'          => $post_data['rules_action'], 
+            'risk_management_data'  => json_encode($post_data['risk_management_data']), 
+            'matched_rules'         => json_encode($post_data['matched_rules']), 
+            'txn_sub_status'        => $post_data['txn_sub_status'] 
         ];
     }
 
