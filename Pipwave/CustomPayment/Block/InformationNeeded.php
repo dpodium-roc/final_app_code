@@ -245,6 +245,8 @@ class InformationNeeded extends \Magento\Framework\View\Element\Template
                     //502
                     if ($txn_sub_status==502) {
                         $order->addStatusHistoryComment('Payment status: Paid.')->setIsCustomerNotified(true);
+                        $status = SELF::PIPWAVE_PAID;
+                        $order->setState($status)->setStatus($status);
 
                         //if auto-invoice enabled
                         if ($this->adminConfig->isInvoiceEnabled() == 1) {
